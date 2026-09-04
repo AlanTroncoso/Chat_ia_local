@@ -1,93 +1,47 @@
-**# Asistente IA Local con Interfaz Gráfica y Orquestador**
+# Asistente IA Local Autónomo (Arquitectura de Agentes & Function Calling)
 
+Resumen del Proyecto
+Este proyecto es un asistente personal de inteligencia artificial 100% local, diseñado bajo una arquitectura modular de agentes autónomos. El sistema abandona los enrutadores basados en expresiones regulares frágiles y utiliza *Function Calling (Llamadas a Herramientas)* nativo mediante *Qwen 2.5 (7B)* y procesamiento de voz con *Whisper*, permitiendo una interacción fluida, natural y libre de alucinaciones operativas.
 
+Características Principales
+1. Capa de Escucha (STT Local): Transcripción de voz a texto en tiempo real utilizando OpenAI Whisper, optimizado para ejecutarse de manera local y con un umbral de pausa adaptado para el habla natural.
+2. Razonamiento y Function Calling: Uso de *Qwen 2.5 (7B)* a través de Ollama, aprovechando su soporte nativo para evaluar intenciones del usuario y extraer automáticamente argumentos estructurados para ejecutar código en Python.
+3. Persistencia y Memoria de Contexto:** Mantiene un historial de conversación dinámico y gestiona bases de datos locales (`calendario.json`) para la administración de eventos.
+4. Automatización del Sistema Operativo (RPA):** Capacidad de interactuar con Windows mediante `pyautogui` para la apertura dinámica de software y utilidades del sistema.
+5. Procesamiento de Lenguaje Natural Temporal:** Integración con `dateparser` para interpretar expresiones de tiempo relativas (ej: "mañana", "el próximo lunes") y calcular fechas exactas en formato ISO.
 
-**#Resumen de en qué consiste actualmente**
+---
+# Requisitos Previos
 
-Este proyecto es una aplicación de escritorio desarrollada en Python que actúa como un asistente personal de Inteligencia Artificial 100% local. Funciona mediante un enrutador híbrido que combina la velocidad del código tradicional de Python con las capacidades de procesamiento de lenguaje natural de un modelo local (Phi-3 a través de Ollama). 
+Antes de clonar o ejecutar el proyecto en tu equipo, asegúrate de contar con lo siguiente:
+1. Python (versión 3.10 o superior)** instalado y añadido a las variables de entorno.
+2. Ollama instalado en tu sistema operativo para la gestión de modelos locales.
+3. Modelo de IA configurado:** Abre tu terminal y descarga el modelo optimizado para *Function Calling*:
+   ```bash
+   ollama pull qwen2.5:7b
+# Librerías y Dependencias
 
+El proyecto requiere las siguientes librerías de Python para el procesamiento de audio, IA y automatización:
 
+Bash
+pip install ollama openai-whisper SpeechRecognition pyautogui dateparser soundfile
+Desglose de Tecnologías:
+ollama: Comunicación directa con el servidor local de modelos de IA.
 
-**#Actualmente, la aplicación permite:**
+openai-whisper & SpeechRecognition: Motor de conversión de voz a texto (STT).
 
-1. Mantener una interfaz gráfica moderna, rápida y en modo oscuro (CustomTkinter) que no se congela gracias al uso de hilos (\*threading\*).
+soundfile: Librería auxiliar de decodificación de audio para Whisper.
 
-2. Realizar un proceso de \*Onboarding\* automático en el primer inicio para almacenar los datos personales y de ubicación del usuario en un archivo local (`perfil.json`).
+pyautogui: Automatización de interfaz de usuario para el control del sistema operativo.
 
-3. Inyectar contexto dinámico en tiempo real (fecha, hora exacta y ubicación) para otorgarle consciencia espacial y temporal a la IA.
+dateparser: Análisis y conversión avanzada de fechas en lenguaje natural.
 
-4. Automatizar el sistema operativo (RPA con PyAutoGUI) para buscar y abrir aplicaciones nativas de Windows de manera fluida.
+json & os & unicodedata: Persistencia de datos, control del sistema y normalización de textos.
 
-5. Mantener una memoria conversacional a corto plazo (\*historial de chat\*) y responder preguntas basadas en razonamiento local (como cálculos de tiempo).
+Roadmap (Próximos Pasos)
+Capa de Síntesis de Voz (TTS): Integración de motores de voz locales (como Kokoro u Ollama TTS) para que el asistente responda de manera hablada.
 
+Expansión de Herramientas (Tools): Incorporación de módulos para consulta de clima, control multimedia y automatización avanzada de archivos locales para el equipo de desarrollo.
 
-
-
-**#Qué se tiene que instalar antes de ejecutar**
-
-Para que este software funcione correctamente en tu equipo, debes tener instalados los siguientes componentes previos:
-
-
-
-1. Python (versión 3.x recomendada): Asegúrate de tenerlo instalado y añadido a las variables de entorno de tu sistema operativo.
-
-2. Ollama:Debes descargar e instalar Ollama desde su sitio oficial para gestionar modelos locales en tu PC.
-
-3. Descargar el modelo baseAbre tu terminal y descarga el modelo Phi-3 ejecutando el siguiente comando:
-
--ollama run phi3
-
-
-
-**#Librerías que se ocuparon**
-
-El proyecto hace uso de librerías nativas de Python y paquetes de terceros que optimizan la interfaz y la ejecución de tareas. Para instalarlas todas de una vez, puedes usar el gestor de paquetes ejecutando el siguiente comando en tu terminal:
-
-
-
--pip install customtkinter ollama pyautogui
-
-El desglose de librerías utilizadas es el siguiente:
-
-
-
-customtkinter: Para la construcción de la interfaz gráfica de usuario (GUI) moderna y adaptable.
-
-
-
-ollama: Librería oficial para la comunicación directa entre Python y el modelo local de IA.
-
-
-
-pyautogui: Utilizada para la automatización de la interfaz del sistema operativo (RPA) en la apertura de aplicaciones.
-
-
-
-threading: Librería nativa de Python para manejar la ejecución de procesos en segundo plano y evitar bloqueos en la interfaz gráfica.
-
-
-
-json y os: Librerías nativas para la gestión, lectura y persistencia de datos locales del perfil de usuario.
-
-
-
-datetime: Librería nativa para la obtención y sincronización del reloj del sistema.
-
-
-
-**#Roadmap (Próximos Pasos)**
-
-1. Integración de Web Scraping: Permitir que el asistente realice búsquedas en internet en tiempo real para consultas de actualidad.
-
-2. Comandos de Voz: Lograr que reconozca la voz para los comandos.
-
-
-
-**#Créditos y herramientas utilizadas**
-
-Desarrollo y Arquitectura: Creado por un estudiante de Ingeniería Civil Informática, encargado del diseño lógico, el enrutador híbrido de intenciones y la integración de sistemas operativos.
-
-
-
-Asistencia Técnica: Desarrollado con el apoyo de IA generativa utilizada como herramienta de consulta para optimizar la sintaxis de Python, estructurar componentes de la interfaz gráfica y resolver incidencias de alucinación de contexto mediante ingeniería de prompts.
-
+Créditos y Autoría
+Desarrollo y Arquitectura: Creado por un estudiante de Ingeniería Civil Informática, enfocado en el diseño de arquitecturas desacopladas, patrones de agentes autónomos y optimización de flujos de desarrollo en equipo.
